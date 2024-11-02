@@ -3,34 +3,29 @@ import fetch from 'node-fetch';
 console.log("SENDMESSAGE -> OK");
 
 export default async function handler(req, res) {
-    console.log("Request received:", req.method, req.body);
+
+    console.log("Request received:", res, req);
     res.setHeader('Access-Control-Allow-Origin', '*'); // Autoriser toutes les origines (à restreindre pour production)
     res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS'); // Autoriser seulement POST et OPTIONS
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, x-api-key'); // Autoriser seulement Content-Type et x-api-key
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type'); // Autoriser seulement Content-Type et x-api-key
+
     if (req.method === 'OPTIONS') {
         // Réponse pour les requêtes préalables (préflight)
         res.status(200).end();
         return;
     }
 
-    const apiKey = req.headers['x-api-key'];
-    const validApiKey = process.env.API_KEY;  // Définie dans les variables d'environnement Vercel
-
-    if (apiKey !== validApiKey) {
-        console.log('Invalid API key:', apiKey);
-        return res.status(403).json({ error: "Unauthorized" });
-    }
-
     if (req.method === 'POST') {
         const { message } = req.body;
         const webhookUrl = process.env.N8N_WEBHOOK_URL;
+        const apiKey = process.env.API_KEY;
 
         try {
             const response = await fetch(webhookUrl, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'x-api-key': validApiKey,
+                    'x-api-key': apiKey,
                 },
                 body: JSON.stringify({ message }),
             });
