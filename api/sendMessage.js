@@ -1,8 +1,10 @@
 export default async function handler(req, res) {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+    res.setHeader('Access-Control-Allow-Origin', '*'); // Autoriser toutes les origines
+    res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS'); // Autoriser les méthodes POST et OPTIONS
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type'); // Autoriser le header Content-Type
 
     if (req.method === 'OPTIONS') {
+        // Réponse pour les requêtes préalables (préflight)
         res.status(200).end();
         return;
     }
