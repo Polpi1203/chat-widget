@@ -87,6 +87,7 @@
 <body>
     <div id="chat-widget"></div>
     <script>
+        import { v4 as uuidv4 } from 'uuid';
         const ChatWidget = () => {
             const [messages, setMessages] = React.useState([]);
             const [inputValue, setInputValue] = React.useState('');
