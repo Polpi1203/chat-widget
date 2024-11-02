@@ -1,6 +1,7 @@
 import fetch from 'node-fetch';
 
 export default async function handler(req, res) {
+    console.log("Request received:", req.method, req.body);
     res.setHeader('Access-Control-Allow-Origin', '*'); // Autoriser toutes les origines (à restreindre pour production)
     res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS'); // Autoriser seulement POST et OPTIONS
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type, x-api-key'); // Autoriser les headers Content-Type et x-api-key
