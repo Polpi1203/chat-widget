@@ -8,7 +8,6 @@ export default async function handler(req, res) {
     }
 
     if (req.method === 'POST') {
-        // Logique pour gérer la requête POST
         const { message } = req.body;
         const webhookUrl = process.env.N8N_WEBHOOK_URL;
 
