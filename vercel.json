@@ -2,7 +2,11 @@
     "version": 2,
     "functions": {
         "api/**/*.js": {
-            "runtime": "@vercel/node16"
+            "runtime": "nodejs14.x",
+            "memory": 1024,
+            "includeFiles": [
+                "api/**/*.js"
+            ]
         }
     },
     "routes": [
