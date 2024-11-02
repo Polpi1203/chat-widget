@@ -117,12 +117,17 @@
                 try {
                     // Utiliser l'API proxy déployée sur Vercel
                     console.log("OKOKOK");
+                    let conversationId = localStorage.getItem('conversationId');
+                    if (!conversationId) {
+                        conversationId = uuidv4();
+                        localStorage.setItem('conversationId', conversationId);
+                    }
                     const response = await fetch('https://chat-widget-neon-eight.vercel.app/api/sendMessage', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json'
                         },
-                        body: JSON.stringify({ message: userMessage.text })
+                        body: JSON.stringify({ message: userMessage.text, conversationId })
                     });
                     if (!response.ok) throw new Error('Erreur réseau');
 
