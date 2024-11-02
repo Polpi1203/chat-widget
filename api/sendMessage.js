@@ -28,6 +28,7 @@ export default async function handler(req, res) {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
+                    'x-api-key': validApiKey,
                 },
                 body: JSON.stringify({ message }),
             });
