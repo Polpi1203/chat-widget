@@ -1,5 +1,7 @@
 import fetch from 'node-fetch';
 
+console.log("SENDMESSAGE -> OK");
+
 export default async function handler(req, res) {
     console.log("Request received:", req.method, req.body);
     res.setHeader('Access-Control-Allow-Origin', '*'); // Autoriser toutes les origines (à restreindre pour production)
