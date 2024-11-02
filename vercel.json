@@ -3,7 +3,7 @@
     "builds": [
         {
             "src": "api/**/*.js",
-            "use": "@vercel/node@18.0.0"
+            "use": "@vercel/node@16"
         },
         {
             "src": "index.html",
