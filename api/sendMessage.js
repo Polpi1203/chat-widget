@@ -15,6 +15,7 @@ export default async function handler(req, res) {
     const validApiKey = process.env.API_KEY;  // Définie dans les variables d'environnement Vercel
 
     if (apiKey !== validApiKey) {
+        console.log('Invalid API key:', apiKey);
         return res.status(403).json({ error: "Unauthorized" });
     }
 
