@@ -1,20 +1,21 @@
+import fetch from 'node-fetch';
+
 export default async function handler(req, res) {
-    res.setHeader('Access-Control-Allow-Origin', '*'); // Autoriser toutes les origines
-    res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS'); // Autoriser les méthodes POST et OPTIONS
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type'); // Autoriser le header Content-Type
+    res.setHeader('Access-Control-Allow-Origin', '*'); // Autoriser toutes les origines (à restreindre pour production)
+    res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS'); // Autoriser seulement POST et OPTIONS
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, x-api-key'); // Autoriser les headers Content-Type et x-api-key
+
+    if (req.method === 'OPTIONS') {
+        // Réponse pour les requêtes préalables (préflight)
+        res.status(200).end();
+        return;
+    }
 
     const apiKey = req.headers['x-api-key'];
     const validApiKey = process.env.API_KEY;  // Définie dans les variables d'environnement Vercel
 
     if (apiKey !== validApiKey) {
         return res.status(403).json({ error: "Unauthorized" });
-    }
-    // Le reste de la fonction si la clé API est valide
-
-    if (req.method === 'OPTIONS') {
-        // Réponse pour les requêtes préalables (préflight)
-        res.status(200).end();
-        return;
     }
 
     if (req.method === 'POST') {
