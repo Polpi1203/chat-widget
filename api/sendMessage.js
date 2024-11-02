@@ -16,7 +16,7 @@ export default async function handler(req, res) {
     }
 
     if (req.method === 'POST') {
-        const { message, conversationId } = req.body;
+        const { message } = req.body;
         const webhookUrl = process.env.N8N_WEBHOOK_URL;
         const apiKey = process.env.API_KEY;
 
@@ -27,7 +27,7 @@ export default async function handler(req, res) {
                     'Content-Type': 'application/json',
                     'x-api-key': apiKey,
                 },
-                body: JSON.stringify({ message, conversationId }),
+                body: JSON.stringify({ message }),
             });
 
             if (!response.ok) {
